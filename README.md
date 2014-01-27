@@ -1,2 +1,2 @@
-infographics.js
+Graph.js
 ========
