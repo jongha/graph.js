@@ -7,9 +7,9 @@ var personas = {
   _ctx: null,
   _drag: false,
 
-  object: function(x, y, width, height) {
+  object: function(x, y, scale) {
     this._ctx.beginPath();
-    this._ctx.arc(x + this._scale, y + this._scale, this._scale * 2, 0, 2 * Math.PI, false);
+    this._ctx.arc(x + scale / 2, y + scale / 2, scale, 0, 2 * Math.PI, false);
     this._ctx.closePath();
     this._ctx.fill();
   },
@@ -19,14 +19,14 @@ var personas = {
   draw: function() {
     personas.clear();
     personas._ctx.fillStyle = "#444444";
-    
-    personas.object(personas._x - 15, personas._y - 15, 30, 30);
+
+    personas.object(personas._x - 15, personas._y - 15, personas._scale);
   },
   init: function(id) {
     var canvas = document.getElementById(id || "canvas");
     canvas.width = this._width;
     canvas.height = this._height;
-    
+
     this._ctx = canvas.getContext("2d");
     setInterval(this.draw, 10);
 
@@ -50,7 +50,7 @@ var personas = {
       }
     };
 
-    canvas.onmouseup = function(e) {
+    canvas.onmouseup = function() {
       _that._drag = false;
       this.onmousemove = null;
     };
